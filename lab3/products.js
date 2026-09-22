@@ -1,18 +1,16 @@
-const product = [
-    {id:1,name:'marker',qty:122,price:13},
-    {id:2,name:'duster', qty:50,price:10},
-]
-
-let nextid =3;
-
- export const getAllproducts = ()=>{
+const products = [
+    { id: 1, name: 'marker', qty: 100, price: 15 },
+    { id: 2, name: 'pen', qty: 50, price: 10 }
+];
+let nextId = 3;
+// Get all products
+export const getAllProducts = () => {
     return products;
-}
-
-export const addproducts = () =>{
-    item.id=nextid;
-    nextid++;
+};
+// Add product
+export const addProduct = (item) => {
+    item.id = nextId;
+    nextId++;
     products.push(item);
     return item;
-
 };
