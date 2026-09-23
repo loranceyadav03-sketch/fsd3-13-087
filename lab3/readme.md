@@ -72,3 +72,7 @@ the content type and status code can be send back to client by two ways
     review:200
 }
 ...
+Get --> no perameter pass to the server when we receive all items 
+post --> add record we pass the value from boady section in JSON formate of API tester
+delete --> to delete any product we pass perameter that is id of the product from url 
+update --> to update any product we pass id from url and data to update from body
