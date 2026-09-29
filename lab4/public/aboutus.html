@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Nexura AI Ecosystem</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            cyan: '#06b6d4',
+                            purple: '#a855f7'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(99, 102, 241, 0.3)' },
+                            '100%': { boxShadow: '0 0 35px rgba(168, 85, 247, 0.6)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(168,85,247,0.3));
+            padding: 1px;
+        }
+
+        /* Light mode explicit overrides */
+        .light {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        .light ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-gray-800/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-3 cursor-pointer">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid font-bold text-white text-xl fa-atom"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight">NEXURA<span class="text-indigo-500">.AI</span></span>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center space-x-8 font-medium text-sm text-gray-300 dark:text-gray-300 light:text-gray-700">
+                <a href="index.html" class="hover:text-indigo-400 transition-colors">Home</a>
+                <a href="index.html#products" class="hover:text-indigo-400 transition-colors">Products</a>
+                <a href="#hero" class="text-indigo-400 font-semibold border-b-2 border-indigo-500 pb-1">About</a>
+                <a href="#vision" class="hover:text-indigo-400 transition-colors">Vision</a>
+                <a href="#timeline" class="hover:text-indigo-400 transition-colors">Our Story</a>
+                <a href="#team" class="hover:text-indigo-400 transition-colors">Team</a>
+                <a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
+            </div>
+
+            <!-- Actions -->
+            <div class="hidden md:flex items-center space-x-4">
+                <!-- Theme Switcher -->
+                <button id="themeToggle" class="p-2.5 rounded-xl glass-panel hover:bg-gray-800/50 text-gray-300 dark:text-gray-200 transition-all" title="Toggle Theme">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i>
+                </button>
+                <a href="#contact" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-600 bg-[length:200%_auto] hover:bg-right transition-all duration-500 shadow-lg shadow-indigo-500/25 active:scale-95">
+                    Join Our Mission
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <div class="md:hidden flex items-center space-x-3">
+                <button id="themeToggleMobile" class="p-2 rounded-lg glass-panel text-gray-300">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline text-amber-400"></i>
+                </button>
+                <button id="mobileMenuBtn" class="text-gray-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-b border-gray-800 px-6 py-4 space-y-4">
+            <a href="index.html" class="block text-gray-300 hover:text-indigo-400 py-2">Home</a>
+            <a href="index.html#products" class="block text-gray-300 hover:text-indigo-400 py-2">Products</a>
+            <a href="#hero" class="block text-indigo-400 font-semibold py-2">About</a>
+            <a href="#vision" class="block text-gray-300 hover:text-indigo-400 py-2">Vision</a>
+            <a href="#timeline" class="block text-gray-300 hover:text-indigo-400 py-2">Our Story</a>
+            <a href="#team" class="block text-gray-300 hover:text-indigo-400 py-2">Team</a>
+            <a href="#contact" class="block text-gray-300 hover:text-indigo-400 py-2">Contact</a>
+            <a href="#contact" class="block text-center py-3 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-md">
+                Join Our Mission
+            </a>
+        </div>
+    </nav>
+
+    <section id="hero" class="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+        <!-- Background Glowing Orbs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/20 rounded-full blur-[130px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-10 w-[350px] h-[350px] bg-cyan-500/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-panel border border-indigo-500/30 text-xs sm:text-sm font-medium text-indigo-300 mb-8">
+                <i class="fa-solid fa-sparkles text-cyan-400"></i>
+                <span>Architecting Human-Centered Intelligence</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl mx-auto leading-tight mb-8">
+                Pioneering Autonomous Systems for <br class="hidden sm:inline"/>
+                <span class="gradient-text">A Smarter, Faster World</span>
+            </h1>
+
+            <p class="text-lg sm:text-xl text-gray-400 dark:text-gray-400 light:text-gray-600 max-w-3xl mx-auto font-normal leading-relaxed mb-16">
+                Founded in 2023, Nexura AI bridges the gap between raw computational power and intuitive human agency. We build autonomous neural networks designed to empower creators, developers, and global enterprises.
+            </p>
+
+            <!-- Key Stats Grid with Live Counters -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800 text-center hover:border-indigo-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white mb-2 font-mono">
+                        <span class="counter" data-target="250000">0</span>+
+                    </div>
+                    <div class="text-xs uppercase tracking-wider font-semibold text-indigo-400">Active Users</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800 text-center hover:border-purple-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white mb-2 font-mono">
+                        <span class="counter" data-target="480">0</span>+
+                    </div>
+                    <div class="text-xs uppercase tracking-wider font-semibold text-purple-400">Enterprise Partners</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800 text-center hover:border-cyan-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white mb-2 font-mono">
+                        <span class="counter" data-target="18">0</span>B+
+                    </div>
+                    <div class="text-xs uppercase tracking-wider font-semibold text-cyan-400">API Calls Monthly</div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800 text-center hover:border-emerald-500/40 transition-all">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white mb-2 font-mono">
+                        <span>99.999</span>%
+                    </div>
+                    <div class="text-xs uppercase tracking-wider font-semibold text-emerald-400">SLA Uptime</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vision" class="py-24 relative bg-gray-950/50 border-t border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Left Narrative -->
+                <div class="space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-medium border border-indigo-500/20">
+                        <i class="fa-solid fa-compass"></i>
+                        <span>Guiding Horizon</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+                        Our Mission to Redefine <span class="gradient-text">Human Capability</span>
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed text-base sm:text-lg">
+                        We believe artificial intelligence shouldn't replace human creativity—it should amplify it tenfold. Our mission is to engineer zero-friction autonomous tools that absorb complexity, letting teams focus on breakthrough innovation.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-gray-900/80 border border-gray-800">
+                            <i class="fa-solid fa-microchip text-indigo-400 text-xl mb-2"></i>
+                            <h4 class="font-bold text-white mb-1">Sub-10ms Neural Routing</h4>
+                            <p class="text-xs text-gray-400">Optimized inference pipelines across multi-region tensor grids.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-gray-900/80 border border-gray-800">
+                            <i class="fa-solid fa-lock text-purple-400 text-xl mb-2"></i>
+                            <h4 class="font-bold text-white mb-1">Zero-Trust Data Vaults</h4>
+                            <p class="text-xs text-gray-400">Privacy-first architecture ensuring full client data sovereignty.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Display -->
+                <div class="relative">
+                    <div class="gradient-border shadow-2xl shadow-indigo-500/10">
+                        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden space-y-6">
+                            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                                <span class="text-xs font-mono text-gray-400">NEXURA CORE PRINCIPLES</span>
+                                <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-xl bg-gray-950 border border-gray-800/80">
+                                    <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                                        <span class="text-indigo-300"><i class="fa-solid fa-bolt mr-2"></i>Speed over Friction</span>
+                                        <span class="text-xs text-emerald-400 font-mono">100% Native</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Eliminating UI latency and API overhead so workflows operate at the speed of thought.</p>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-gray-950 border border-gray-800/80">
+                                    <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                                        <span class="text-purple-300"><i class="fa-solid fa-shield-halved mr-2"></i>Ethical Alignment</span>
+                                        <span class="text-xs text-indigo-400 font-mono">Audited</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Strict governance standards safeguarding user privacy and preventing bias.</p>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-gray-950 border border-gray-800/80">
+                                    <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                                        <span class="text-cyan-300"><i class="fa-solid fa-network-wired mr-2"></i>Open Interoperability</span>
+                                        <span class="text-xs text-cyan-400 font-mono">500+ Adapters</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400">Designed to plug seamlessly into any legacy software infrastructure.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Our History</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">The Nexura Journey</p>
+                <p class="text-gray-400">From a bold garage experiment to a globally trusted intelligence ecosystem.</p>
+            </div>
+
+            <!-- Timeline Line Container -->
+            <div class="relative max-w-4xl mx-auto">
+                <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-500 via-purple-500 to-cyan-400 hidden md:block"></div>
+
+                <div class="space-y-12">
+                    
+                    <!-- Milestone 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between">
+                        <div class="w-full md:w-5/12 text-left md:text-right pr-0 md:pr-8 mb-4 md:mb-0">
+                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest">Q2 2023</span>
+                            <h3 class="text-xl font-bold text-white mt-1">Genesis & Founding</h3>
+                            <p class="text-xs text-gray-400 mt-2">Nexura AI was formed by AI researchers from MIT and Stanford with a vision to build autonomous, multi-modal context buffers.</p>
+                        </div>
+                        <div class="z-10 w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/50 mb-4 md:mb-0">
+                            <i class="fa-solid fa-seedling text-sm"></i>
+                        </div>
+                        <div class="w-full md:w-5/12 pl-0 md:pl-8">
+                            <div class="glass-panel p-4 rounded-xl border border-gray-800 text-xs text-gray-400">
+                                <span class="text-indigo-300 font-semibold">Milestone:</span> Seed funding of $4.2M raised from leading tech vcs.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 2 -->
+                    <div class="relative flex flex-col md:flex-row-reverse items-center justify-between">
+                        <div class="w-full md:w-5/12 text-left pl-0 md:pl-8 mb-4 md:mb-0">
+                            <span class="text-xs font-bold text-purple-400 uppercase tracking-widest">Q1 2024</span>
+                            <h3 class="text-xl font-bold text-white mt-1">Nexura Engine 1.0 Release</h3>
+                            <p class="text-xs text-gray-400 mt-2">Launched our first flagship autonomous coding and voice pipeline SDK for beta enterprise testers.</p>
+                        </div>
+                        <div class="z-10 w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-lg shadow-purple-500/50 mb-4 md:mb-0">
+                            <i class="fa-solid fa-code text-sm"></i>
+                        </div>
+                        <div class="w-full md:w-5/12 pr-0 md:pr-8">
+                            <div class="glass-panel p-4 rounded-xl border border-gray-800 text-xs text-gray-400">
+                                <span class="text-purple-300 font-semibold">Milestone:</span> Surpassed 50,000 active developers in first 90 days.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between">
+                        <div class="w-full md:w-5/12 text-left md:text-right pr-0 md:pr-8 mb-4 md:mb-0">
+                            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Q4 2024</span>
+                            <h3 class="text-xl font-bold text-white mt-1">Series A & Global Expansion</h3>
+                            <p class="text-xs text-gray-400 mt-2">Closed $32M Series A round. Expanded data centers to Tokyo, Frankfurt, Singapore, and San Jose.</p>
+                        </div>
+                        <div class="z-10 w-10 h-10 rounded-full bg-cyan-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/50 mb-4 md:mb-0">
+                            <i class="fa-solid fa-globe text-sm"></i>
+                        </div>
+                        <div class="w-full md:w-5/12 pl-0 md:pl-8">
+                            <div class="glass-panel p-4 rounded-xl border border-gray-800 text-xs text-gray-400">
+                                <span class="text-cyan-300 font-semibold">Milestone:</span> Achieved SOC2 Type II and GDPR enterprise compliance.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 4 -->
+                    <div class="relative flex flex-col md:flex-row-reverse items-center justify-between">
+                        <div class="w-full md:w-5/12 text-left pl-0 md:pl-8 mb-4 md:mb-0">
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">2026 Today</span>
+                            <h3 class="text-xl font-bold text-white mt-1">The Nexura 4.0 Era</h3>
+                            <p class="text-xs text-gray-400 mt-2">Unifying voice assistance, predictive analytics, and developer SDKs into a single hyper-threaded suite.</p>
+                        </div>
+                        <div class="z-10 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/50 mb-4 md:mb-0">
+                            <i class="fa-solid fa-rocket text-sm"></i>
+                        </div>
+                        <div class="w-full md:w-5/12 pr-0 md:pr-8">
+                            <div class="glass-panel p-4 rounded-xl border border-gray-800 text-xs text-gray-400">
+                                <span class="text-emerald-300 font-semibold">Milestone:</span> 18+ Billion monthly API calls across 480 global enterprises.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative bg-gray-950/40 border-t border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Our DNA</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight">Core Values Driving Us Forward</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Value 1 -->
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-indigo-500/60 transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Relentless Innovation</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        We don't follow tech trends—we pioneer new computational paradigms that challenge what AI can accomplish.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-purple-500/60 transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Privacy First</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        User data is sacred. We build zero-retention architectures that prioritize absolute sovereignty and security.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-cyan-500/60 transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-cyan-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Radical Transparency</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        No black boxes. We advocate for clear AI explainability, open architecture standards, and fair pricing.
+                    </p>
+                </div>
+
+                <!-- Value 4 -->
+                <div class="glass-panel p-8 rounded-3xl border border-gray-800 hover:border-emerald-500/60 transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Human Empathy</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Every algorithm we write is designed to empower human users, eliminate drudgery, and spark human potential.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Meet The Minds</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight">Our Leadership Team</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Member 1 -->
+                <div onclick="openTeamModal(1)" class="glass-panel rounded-3xl border border-gray-800 overflow-hidden hover:border-indigo-500/60 transition-all cursor-pointer group hover:-translate-y-2">
+                    <div class="h-64 bg-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Dr. Elena Vance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x500/1e1b4b/ffffff?text=Elena+Vance'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">Dr. Elena Vance</h3>
+                        <p class="text-xs text-indigo-400 font-semibold mb-3">CEO & Co-Founder</p>
+                        <p class="text-xs text-gray-400 line-clamp-2 mb-4">Ex-Stanford AI Lab Director with 15+ years pioneering neural context processing.</p>
+                        <div class="flex space-x-3 text-gray-400 text-sm">
+                            <span class="hover:text-indigo-400"><i class="fa-brands fa-x-twitter"></i></span>
+                            <span class="hover:text-indigo-400"><i class="fa-brands fa-linkedin"></i></span>
+                            <span class="hover:text-indigo-400"><i class="fa-brands fa-github"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div onclick="openTeamModal(2)" class="glass-panel rounded-3xl border border-gray-800 overflow-hidden hover:border-purple-500/60 transition-all cursor-pointer group hover:-translate-y-2">
+                    <div class="h-64 bg-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Marcus Chen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x500/3b0764/ffffff?text=Marcus+Chen'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">Marcus Chen</h3>
+                        <p class="text-xs text-purple-400 font-semibold mb-3">CTO & Co-Founder</p>
+                        <p class="text-xs text-gray-400 line-clamp-2 mb-4">Former Principal Distributed Systems Architect at Google Brain and DeepMind.</p>
+                        <div class="flex space-x-3 text-gray-400 text-sm">
+                            <span class="hover:text-purple-400"><i class="fa-brands fa-x-twitter"></i></span>
+                            <span class="hover:text-purple-400"><i class="fa-brands fa-linkedin"></i></span>
+                            <span class="hover:text-purple-400"><i class="fa-brands fa-github"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div onclick="openTeamModal(3)" class="glass-panel rounded-3xl border border-gray-800 overflow-hidden hover:border-cyan-500/60 transition-all cursor-pointer group hover:-translate-y-2">
+                    <div class="h-64 bg-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Sarah Jenkins" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x500/083344/ffffff?text=Sarah+Jenkins'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Sarah Jenkins</h3>
+                        <p class="text-xs text-cyan-400 font-semibold mb-3">Chief Product Officer</p>
+                        <p class="text-xs text-gray-400 line-clamp-2 mb-4">Product design strategist specializing in natural language and voice user interfaces.</p>
+                        <div class="flex space-x-3 text-gray-400 text-sm">
+                            <span class="hover:text-cyan-400"><i class="fa-brands fa-x-twitter"></i></span>
+                            <span class="hover:text-cyan-400"><i class="fa-brands fa-linkedin"></i></span>
+                            <span class="hover:text-cyan-400"><i class="fa-brands fa-github"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div onclick="openTeamModal(4)" class="glass-panel rounded-3xl border border-gray-800 overflow-hidden hover:border-emerald-500/60 transition-all cursor-pointer group hover:-translate-y-2">
+                    <div class="h-64 bg-gray-900 relative overflow-hidden flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Dr. Aris Thorne" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x500/064e3b/ffffff?text=Aris+Thorne'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent"></div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Dr. Aris Thorne</h3>
+                        <p class="text-xs text-emerald-400 font-semibold mb-3">Head of AI Safety & Security</p>
+                        <p class="text-xs text-gray-400 line-clamp-2 mb-4">Quantum encryption researcher leading homomorphic vault compliance.</p>
+                        <div class="flex space-x-3 text-gray-400 text-sm">
+                            <span class="hover:text-emerald-400"><i class="fa-brands fa-x-twitter"></i></span>
+                            <span class="hover:text-emerald-400"><i class="fa-brands fa-linkedin"></i></span>
+                            <span class="hover:text-emerald-400"><i class="fa-brands fa-github"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 relative bg-gray-950/60 border-t border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Behind The Curtain</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">Our Technology Stack</p>
+                <p class="text-gray-400">Deep dive into the underlying architecture powers Nexura's zero-latency infrastructure.</p>
+            </div>
+
+            <!-- Stack Switcher Buttons -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1.5 rounded-2xl glass-panel border border-gray-800 max-w-full overflow-x-auto">
+                    <button onclick="switchStack('architecture')" id="stack-btn-architecture" class="stack-btn px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 text-white bg-indigo-600 shadow-md">
+                        <i class="fa-solid fa-microchip mr-2"></i> Neural Architecture
+                    </button>
+                    <button onclick="switchStack('security')" id="stack-btn-security" class="stack-btn px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-shield-cat mr-2"></i> Security Matrix
+                    </button>
+                    <button onclick="switchStack('infra')" id="stack-btn-infra" class="stack-btn px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 text-gray-400 hover:text-white">
+                        <i class="fa-solid fa-server mr-2"></i> Global Infrastructure
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stack Dynamic Content Window -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-gray-800 min-h-[380px]">
+                
+                <!-- Architecture Content -->
+                <div id="stack-architecture" class="stack-content grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold text-white">Hyper-Threaded Context Graph</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Instead of rigid, linear token evaluation, Nexura uses dynamic sparse context graphs. This allows models to recall historical context across millions of tokens without linear compute overhead.
+                        </p>
+                        <div class="space-y-2 text-xs code-font">
+                            <div class="p-3 bg-gray-950 rounded-lg text-emerald-400 border border-gray-800">
+                                [Graph Optimizer] Sparse tensor memory usage down 64%
+                            </div>
+                            <div class="p-3 bg-gray-950 rounded-lg text-indigo-300 border border-gray-800">
+                                [Inference Cluster] Multi-GPU payload split active (8 x H100)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gray-950 rounded-2xl border border-gray-800 font-mono text-xs text-indigo-300 leading-relaxed overflow-x-auto">
+<span class="text-gray-500">// Neural Graph Topology Config</span>
+<span class="text-purple-400">class</span> <span class="text-yellow-300">NexuraSparseGraph</span>:
+  <span class="text-purple-400">def</span> <span class="text-blue-400">__init__</span>(self, node_capacity=<span class="text-cyan-400">1_000_000</span>):
+      self.memory_buffer = ZeroCopyTensorBuffer()
+      self.latency_target = <span class="text-emerald-400">0.008</span> <span class="text-gray-500"># 8ms</span>
+
+  <span class="text-purple-400">def</span> <span class="text-blue-400">route_token_stream</span>(self, stream_payload):
+      <span class="text-purple-400">return</span> self.memory_buffer.process_async(stream_payload)
+                    </div>
+                </div>
+
+                <!-- Security Content -->
+                <div id="stack-security" class="stack-content hidden grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold text-white">Homomorphic Zero-Trust Protocol</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Your queries are obfuscated at the hardware boundary using lattice-based homomorphic encryption. Even if a data center node were compromised, raw prompt data remains unreadable.
+                        </p>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-purple-400"></i>
+                                <span>SOC2 Type II & HIPAA Compliance Certified</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-purple-400"></i>
+                                <span>Post-Quantum Kyber-1024 Key Exchange</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-gray-950 rounded-2xl border border-gray-800 font-mono text-xs text-purple-300 leading-relaxed overflow-x-auto">
+<span class="text-gray-500">// Encryption Vault Handshake</span>
+<span class="text-purple-400">const</span> vault = <span class="text-purple-400">new</span> QuantumVault({
+  algorithm: <span class="text-emerald-400">'KYBER-1024-PQC'</span>,
+  ephemeralSessionKey: <span class="text-cyan-400">true</span>
+});
+
+<span class="text-purple-400">await</span> vault.sealPayload(userStreamData);
+<span class="text-gray-500">// Status: Secured via Lattice Cryptography</span>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Content -->
+                <div id="stack-infra" class="stack-content hidden grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold text-white">Global Anycast Tensor Mesh</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Deployed across 24 edge regions with automated fallback routing. Request requests are automatically handed off to the lowest-latency available GPU cluster worldwide.
+                        </p>
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                            <div class="p-3 bg-gray-950 rounded-lg border border-gray-800">
+                                <span class="block font-bold text-white">US-East</span>
+                                <span class="text-emerald-400 font-mono">1.1ms</span>
+                            </div>
+                            <div class="p-3 bg-gray-950 rounded-lg border border-gray-800">
+                                <span class="block font-bold text-white">EU-Central</span>
+                                <span class="text-emerald-400 font-mono">1.8ms</span>
+                            </div>
+                            <div class="p-3 bg-gray-950 rounded-lg border border-gray-800">
+                                <span class="block font-bold text-white">AP-South</span>
+                                <span class="text-emerald-400 font-mono">2.2ms</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-gray-950 rounded-2xl border border-gray-800 flex items-center justify-center min-h-[180px]">
+                        <div class="text-center space-y-3">
+                            <i class="fa-solid fa-network-wired text-4xl text-cyan-400 animate-pulse"></i>
+                            <div class="text-xs text-gray-300 font-mono">24 Active Mesh Regions Operational</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 relative bg-gradient-to-b from-transparent via-indigo-950/20 to-gray-950">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 sm:p-14 rounded-3xl border border-indigo-500/30 text-center relative overflow-hidden shadow-2xl">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <h2 class="text-3xl sm:text-5xl font-extrabold mb-4">Ready to Build the Future?</h2>
+                <p class="text-gray-400 max-w-xl mx-auto mb-8 text-sm sm:text-base">
+                    Whether you're looking to integrate our SDK or join our world-class engineering team, we'd love to connect.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="index.html#pricing" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-indigo-500 via-purple-600 to-cyan-500 hover:opacity-90 transition-all shadow-xl shadow-indigo-500/25">
+                        Get Started Free
+                    </a>
+                    <button onclick="alert('Careers page opening... We are hiring AI research engineers!')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-gray-200 glass-panel hover:bg-gray-800/50 transition-all border border-gray-700/60">
+                        View Open Careers
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 py-12 border-t border-gray-800/80 text-gray-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white">
+                        <i class="fa-solid fa-atom"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white">NEXURA<span class="text-indigo-500">.AI</span></span>
+                </div>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Building next-generation autonomous software infrastructure for forward-thinking enterprises worldwide.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-3">Company</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#hero" class="hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="#vision" class="hover:text-white transition-colors">Vision & Mission</a></li>
+                    <li><a href="#team" class="hover:text-white transition-colors">Leadership Team</a></li>
+                    <li><a href="#timeline" class="hover:text-white transition-colors">Our History</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-3">Ecosystem</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="index.html#products" class="hover:text-white transition-colors">Smart Assistant</a></li>
+                    <li><a href="index.html#products" class="hover:text-white transition-colors">Analytics Hub</a></li>
+                    <li><a href="index.html#products" class="hover:text-white transition-colors">Developer SDK</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-3">Connect</h4>
+                <div class="flex space-x-4 text-lg mb-4">
+                    <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-discord"></i></a>
+                    <a href="#" class="hover:text-indigo-400"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+                <p class="text-xs text-gray-500">San Francisco, CA • Tokyo, JP</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-gray-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+            <span>&copy; <span id="year"></span> Nexura AI Technologies Inc. All rights reserved.</span>
+            <div class="flex space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <a href="#" class="hover:underline">Terms of Service</a>
+                <a href="#" class="hover:underline">Security Matrix</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="teamModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-xl rounded-3xl border border-gray-700 p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeTeamModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center space-x-4 mb-6">
+                <img id="modalImg" src="" alt="" class="w-16 h-16 rounded-2xl object-cover border border-indigo-500/50">
+                <div>
+                    <h3 id="modalName" class="text-2xl font-bold text-white"></h3>
+                    <p id="modalRole" class="text-xs font-semibold text-indigo-400"></p>
+                </div>
+            </div>
+
+            <div id="modalBio" class="text-gray-300 text-sm leading-relaxed mb-6 space-y-3"></div>
+
+            <div class="pt-4 border-t border-gray-800 flex justify-end">
+                <button onclick="closeTeamModal()" class="px-5 py-2.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-white text-xs font-semibold">
+                    Close Profile
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set dynamic copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme Toggle Functionality
+        const themeToggleBtns = [document.getElementById('themeToggle'), document.getElementById('themeToggleMobile')];
+        themeToggleBtns.forEach(btn => {
+            if(btn) {
+                btn.addEventListener('click', () => {
+                    document.documentElement.classList.toggle('dark');
+                    document.documentElement.classList.toggle('light');
+                });
+            }
+        });
+
+        // Mobile Menu Drawer
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Animated Counters
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target.toLocaleString();
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // Trigger counters on load
+        window.addEventListener('DOMContentLoaded', startCounters);
+
+        // Tech Stack Switcher
+        function switchStack(stackKey) {
+            document.querySelectorAll('.stack-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                btn.classList.add('text-gray-400');
+            });
+            document.querySelectorAll('.stack-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            const activeBtn = document.getElementById(`stack-btn-${stackKey}`);
+            const activeContent = document.getElementById(`stack-${stackKey}`);
+
+            if (activeBtn && activeContent) {
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-gray-400');
+                activeContent.classList.remove('hidden');
+            }
+        }
+
+        // Team Modal Data & Functions
+        const teamData = {
+            1: {
+                name: "Dr. Elena Vance",
+                role: "CEO & Co-Founder",
+                img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+                bio: "<p>Dr. Elena Vance holds a PhD in Computer Science from Stanford University, where she spent 8 years directing research on multi-modal neural context processing.</p><p>Before founding Nexura AI, she authored 24 peer-reviewed papers on low-latency generative models and advised top tech firms on ethical AI scaling.</p>"
+            },
+            2: {
+                name: "Marcus Chen",
+                role: "CTO & Co-Founder",
+                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+                bio: "<p>Marcus Chen was formerly Principal Architect at Google Brain and DeepMind, leading distributed GPU cluster management for frontier large language models.</p><p>He specializes in sub-millisecond network routing algorithms and zero-copy memory buffers that power Nexura's core infrastructure.</p>"
+            },
+            3: {
+                name: "Sarah Jenkins",
+                role: "Chief Product Officer",
+                img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+                bio: "<p>Sarah brings 12 years of experience designing human-computer interfaces. She previously led product teams at Figma and Apple, focusing on conversational UX and natural interaction.</p><p>At Nexura, she ensures our complex AI tools remain seamlessly intuitive for creators and developers alike.</p>"
+            },
+            4: {
+                name: "Dr. Aris Thorne",
+                role: "Head of AI Safety & Security",
+                img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+                bio: "<p>Dr. Aris Thorne is a globally recognized cryptography expert specializing in homomorphic encryption and lattice-based security architectures.</p><p>He leads Nexura's zero-trust security team, guaranteeing enterprise client data privacy and regulatory compliance worldwide.</p>"
+            }
+        };
+
+        function openTeamModal(id) {
+            const member = teamData[id];
+            if (!member) return;
+
+            document.getElementById('modalName').textContent = member.name;
+            document.getElementById('modalRole').textContent = member.role;
+            document.getElementById('modalImg').src = member.img;
+            document.getElementById('modalBio').innerHTML = member.bio;
+
+            document.getElementById('teamModal').classList.remove('hidden');
+        }
+
+        function closeTeamModal() {
+            document.getElementById('teamModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
