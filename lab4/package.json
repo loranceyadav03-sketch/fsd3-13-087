@@ -2,10 +2,10 @@
   "name": "lab4",
   "version": "1.0.0",
   "description": "1. create projrct folder \r 2. goto projrct and open terminal\r 3. execute 'npm init -y'\r 4. install 'npm i nodemon -D'\r 5. open package.json\r     a. change 'type: 'module'\r     b. update script{\r         \"start\": node prg1.js\",\r         \"dev\": \"nodemone prg1.js\"\r     }\r 6. create prg1.js in folder\r 7. add folder Name/node_modules in .gitignore",
-  "main": "index.js",
+  "main": "prg4.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon prg3.js"
+    "start": "node prg4.js",
+    "dev": "nodemon prg4.js"
   },
   "keywords": [],
   "author": "",
