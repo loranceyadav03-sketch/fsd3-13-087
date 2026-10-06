@@ -13,4 +13,18 @@
     }
 6. create prg1.js in folder
 7. add folder Name/node_modules in .gitignore
+## map
 
+...
+array.map((item)=>{
+    return
+})
+
+array.map((item)=>())
+...
+8. this function is use to itrate any array it must return new array
+ 
+exclude number of properties from any json object
+
+# search 
+to search anyitem in json array be use find method it will retun null on unsucessful or object on successful
